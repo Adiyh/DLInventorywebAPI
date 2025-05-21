@@ -1,0 +1,17 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vsidx
+*.log
+TestResults/
+*.db
+*.cache
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+Desktop.ini
