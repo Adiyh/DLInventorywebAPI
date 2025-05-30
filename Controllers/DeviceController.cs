@@ -1,6 +1,7 @@
 ﻿using LaptopService.Core.Services.Interface;
 using LaptopService.Dtos;
 using LaptopService.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -27,6 +28,7 @@ namespace LaptopWebApi.Controllers
 
         [HttpGet]
         [Route("GetAllLaptopDetails")]
+
         public IActionResult GetAllLaptopDetails()
         {
             try
@@ -77,6 +79,7 @@ namespace LaptopWebApi.Controllers
                 return StatusCode(500, "An Error has occured:" + ex.Message);
             }
         }
+       
 
         [HttpPut]
         [Route("UpdateLaptopDetails")]
@@ -98,9 +101,8 @@ namespace LaptopWebApi.Controllers
             }
         }
 
-
-
         [HttpDelete("{id}")]
+        
         public IActionResult Delete(int id)
         {
             try
@@ -122,3 +124,4 @@ namespace LaptopWebApi.Controllers
 
     }
 }
+
