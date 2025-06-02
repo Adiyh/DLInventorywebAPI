@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaptopWebApi", "LaptopWebApi.csproj", "{D9C18845-D9AD-44BB-9947-E67257753981}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaptopService", "..\..\Users\adars\OneDrive\Desktop\LaptopService\LaptopService.csproj", "{C93DD801-CEB1-BF24-F07B-4FCC590ECADD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetManagementService", "..\..\Users\adars\OneDrive\Desktop\LaptopService\AssetManagementService.csproj", "{C93DD801-CEB1-BF24-F07B-4FCC590ECADD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

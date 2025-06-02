@@ -79,7 +79,7 @@ namespace LaptopWebApi.Controllers
                 return StatusCode(500, "An Error has occured:" + ex.Message);
             }
         }
-       
+
 
         [HttpPut]
         [Route("UpdateLaptopDetails")]
@@ -102,7 +102,7 @@ namespace LaptopWebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        
+
         public IActionResult Delete(int id)
         {
             try
@@ -124,4 +124,3 @@ namespace LaptopWebApi.Controllers
 
     }
 }
-
