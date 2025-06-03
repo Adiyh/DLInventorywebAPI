@@ -121,6 +121,25 @@ namespace LaptopWebApi.Controllers
                 return StatusCode(500, "An Error has occured:" + ex.Message);
             }
         }
+        [HttpGet]
+        [Route("GetLaptopByAssetTag/{assetTag}")]
+        public IActionResult GetLaptopByAssetTag(int assetTag)
+        {
+            try
+            {
+                var laptop = _laptopService.GetLaptopByAssetTag(assetTag);
+                if (laptop == null)
+                    return NotFound($"Laptop with AssetTag {assetTag} does not exist.");
+
+                var laptopDto = LaptopMapper.ToDto(laptop);
+                return Ok(laptopDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An Error has occured:" + ex.Message);
+            }
+        }
+
 
     }
 }

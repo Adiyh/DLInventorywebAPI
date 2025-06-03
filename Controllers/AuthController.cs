@@ -25,32 +25,13 @@ namespace LaptopWebApi.Controllers
             }
         }
 
-        //[HttpPost]
-        //[Route("user-login")]
-        //public IActionResult Login(User user)
-        //{
-        //    try
-        //    {
-        //        var loggedInUser = _authService.Login(user.Username, user.Password);
-
-        //        if (loggedInUser == null)
-        //            return Unauthorized("Invalid username or password.");
-
-        //        return Ok("Login successful.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        StatusCode(500, "An Error has occured:" + ex.Message);
-        //        throw;
-        //    }
-        //}
-        
-        [HttpPost("user-login")]
-        public IActionResult Login([FromBody] LoginRequestDto request)
+        [HttpPost]
+        [Route("user-login")]
+        public IActionResult Login(User user)
         {
             try
             {
-                var loggedInUser = _authService.Login(request.Username, request.Password);
+                var loggedInUser = _authService.Login(user.Username, user.Password);
 
                 if (loggedInUser == null)
                     return Unauthorized("Invalid username or password.");
@@ -59,9 +40,28 @@ namespace LaptopWebApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "An error has occurred: " + ex.Message);
+                StatusCode(500, "An Error has occured:" + ex.Message);
+                throw;
             }
         }
+
+        //[HttpPost("user-login")]
+        //public IActionResult Login([FromBody] LoginRequestDto request)
+        //{
+        //    try
+        //    {
+        //        var loggedInUser = _authService.Login(request.Username, request.Password);
+
+        //        if (loggedInUser == null)
+        //            return Unauthorized("Invalid username or password.");
+
+        //        return Ok("Login successful.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, "An error has occurred: " + ex.Message);
+        //    }
+        //}
 
 
     }

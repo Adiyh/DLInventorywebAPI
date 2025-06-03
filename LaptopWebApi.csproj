@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Users\adars\OneDrive\Desktop\LaptopService\AssetManagementService.csproj" />
+    <ProjectReference Include="..\..\Users\adars\OneDrive\Desktop\LaptopService\LaptopService.csproj" />
   </ItemGroup>
 
 </Project>
