@@ -1,9 +1,11 @@
 ﻿using LaptopService.Core.Services.Interface;
 using LaptopService.Dtos;
 using LaptopService.Models;
+using LaptopService.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace LaptopWebApi.Controllers
 {
@@ -12,6 +14,7 @@ namespace LaptopWebApi.Controllers
     public class DeviceController : ControllerBase
     {
         private readonly ILaptopService _laptopService;
+        private readonly EncryptionLogic _encryption;
 
         public DeviceController(ILaptopService laptopService)
         {
@@ -139,6 +142,25 @@ namespace LaptopWebApi.Controllers
                 return StatusCode(500, "An Error has occured:" + ex.Message);
             }
         }
+
+        //[HttpGet("GetLaptopHistory/{laptopId}")]
+        //public IActionResult GetLaptopHistory(int laptopId)
+        //{
+        //    var history = _laptopService.GetLaptopHistory(laptopId);
+        //    return Ok(history.Select(h => new {
+        //        h.Action,
+        //        h.ChangeDate,
+        //        h.DeviceJson // You can decrypt and deserialize if you want to show details
+        //    }));
+        //}
+        [HttpGet("GetLaptopHistory/{laptopId}")]
+        public IActionResult GetLaptopHistory(int laptopId)
+        {
+            var history = _laptopService.GetLaptopHistory(laptopId);
+            return Ok(history);
+        }
+
+
 
 
     }

@@ -5,8 +5,10 @@ using LaptopService.Core.Services.Interface;
 using LaptopService.Infrastructure.Repositories.ConcreteClass;
 using LaptopService.Infrastructure.Repositories.Interface;
 using LaptopService.Models;
+using LaptopService.Utility;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<EncryptionSettings>(
@@ -34,6 +36,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
 
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -47,17 +50,11 @@ builder.Services.AddCors(options =>
     });
 });
 
-var app = builder.Build(); // 🔹 Move this line before app.UseCors
+var app = builder.Build(); 
 
 app.UseCors("AllowAngularApp");
 
 
-//🔹 Apply migrations and create DB if not exists
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.EnsureCreated();
-}
 
 // 🔹 Middleware
 if (app.Environment.IsDevelopment())
