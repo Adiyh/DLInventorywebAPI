@@ -143,25 +143,24 @@ namespace LaptopWebApi.Controllers
             }
         }
 
-        //[HttpGet("GetLaptopHistory/{laptopId}")]
-        //public IActionResult GetLaptopHistory(int laptopId)
-        //{
-        //    var history = _laptopService.GetLaptopHistory(laptopId);
-        //    return Ok(history.Select(h => new {
-        //        h.Action,
-        //        h.ChangeDate,
-        //        h.DeviceJson // You can decrypt and deserialize if you want to show details
-        //    }));
-        //}
-        [HttpGet("GetLaptopHistory/{laptopId}")]
-        public IActionResult GetLaptopHistory(int laptopId)
+        [HttpPost("AddComment")]
+        public async Task<IActionResult> AddComment([FromBody] AssetComment comment)
         {
-            var history = _laptopService.GetLaptopHistory(laptopId);
-            return Ok(history);
+            if (comment == null || string.IsNullOrWhiteSpace(comment.Commentor) || string.IsNullOrWhiteSpace(comment.Comment))
+                return BadRequest("Invalid comment data.");
+
+            comment.Date = comment.Date == default ? DateTime.UtcNow : comment.Date;
+            await _laptopService.AddCommentAsync(comment);
+            return Ok();
         }
 
-
-
+        [HttpGet("GetComments/{assetId}")]
+        public async Task<IActionResult> GetComments(int assetId)
+        {
+            var comments = await _laptopService.GetCommentsAsync(assetId);
+            var result = comments.Select(c => new { c.Date, c.Commentor, c.Comment });
+            return Ok(result);
+        }
 
     }
 }
