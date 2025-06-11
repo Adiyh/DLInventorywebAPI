@@ -143,24 +143,43 @@ namespace LaptopWebApi.Controllers
             }
         }
 
+        //[HttpPost("AddComment")]
+        //public async Task<IActionResult> AddComment([FromBody] AssetComment comment)
+        //{
+        //    if (comment == null || string.IsNullOrWhiteSpace(comment.Commentor) || string.IsNullOrWhiteSpace(comment.Comment))
+        //        return BadRequest("Invalid comment data.");
+
+        //    comment.Date = comment.Date == default ? DateTime.UtcNow : comment.Date;
+        //    await _laptopService.AddCommentAsync(comment);
+        //    return Ok();
+        //}
+
+        //[HttpGet("GetComments/{assetId}")]
+        //public async Task<IActionResult> GetComments(int assetId)
+        //{
+        //    var comments = await _laptopService.GetCommentsAsync(assetId);
+        //    var result = comments.Select(c => new { c.Date, c.Commentor, c.Comment });
+        //    return Ok(result);
+        //}
         [HttpPost("AddComment")]
-        public async Task<IActionResult> AddComment([FromBody] AssetComment comment)
+        public IActionResult AddComment([FromBody] AssetComment comment)
         {
             if (comment == null || string.IsNullOrWhiteSpace(comment.Commentor) || string.IsNullOrWhiteSpace(comment.Comment))
                 return BadRequest("Invalid comment data.");
 
             comment.Date = comment.Date == default ? DateTime.UtcNow : comment.Date;
-            await _laptopService.AddCommentAsync(comment);
+            _laptopService.AddComment(comment);
             return Ok();
         }
 
         [HttpGet("GetComments/{assetId}")]
-        public async Task<IActionResult> GetComments(int assetId)
+        public IActionResult GetComments(int assetId)
         {
-            var comments = await _laptopService.GetCommentsAsync(assetId);
+            var comments = _laptopService.GetComments(assetId);
             var result = comments.Select(c => new { c.Date, c.Commentor, c.Comment });
             return Ok(result);
         }
+
 
     }
 }
