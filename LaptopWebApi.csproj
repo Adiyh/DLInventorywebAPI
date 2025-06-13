@@ -25,4 +25,8 @@
     <ProjectReference Include="..\..\Users\adars\OneDrive\Desktop\LaptopService\LaptopService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="publish\" />
+  </ItemGroup>
+
 </Project>

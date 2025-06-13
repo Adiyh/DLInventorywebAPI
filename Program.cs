@@ -22,8 +22,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<ILaptopRepository, LaptopRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-//builder.Services.AddScoped<ILaptopHistoryRepository, LaptopHistoryRepository>();
-
 
 // 🔹 Register services
 builder.Services.AddScoped<ILaptopService, LaptopServices>();
@@ -62,6 +60,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
