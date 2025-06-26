@@ -84,7 +84,7 @@ namespace LaptopWebApi.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPost]
         [Route("UpdateLaptopDetails")]
         public IActionResult UpdateLaptopDetails(LaptopDto laptopDto)
         {
@@ -104,7 +104,7 @@ namespace LaptopWebApi.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpPost("{id}")]
 
         public IActionResult Delete(int id)
         {
@@ -143,41 +143,41 @@ namespace LaptopWebApi.Controllers
             }
         }
 
-        //[HttpPost("AddComment")]
-        //public async Task<IActionResult> AddComment([FromBody] AssetComment comment)
-        //{
-        //    if (comment == null || string.IsNullOrWhiteSpace(comment.Commentor) || string.IsNullOrWhiteSpace(comment.Comment))
-        //        return BadRequest("Invalid comment data.");
 
-        //    comment.Date = comment.Date == default ? DateTime.UtcNow : comment.Date;
-        //    await _laptopService.AddCommentAsync(comment);
-        //    return Ok();
-        //}
-
-        //[HttpGet("GetComments/{assetId}")]
-        //public async Task<IActionResult> GetComments(int assetId)
-        //{
-        //    var comments = await _laptopService.GetCommentsAsync(assetId);
-        //    var result = comments.Select(c => new { c.Date, c.Commentor, c.Comment });
-        //    return Ok(result);
-        //}
         [HttpPost("AddComment")]
         public IActionResult AddComment([FromBody] AssetComment comment)
         {
-            if (comment == null || string.IsNullOrWhiteSpace(comment.Commentor) || string.IsNullOrWhiteSpace(comment.Comment))
-                return BadRequest("Invalid comment data.");
+            try
+            {
+                if (comment == null || string.IsNullOrWhiteSpace(comment.Commentor) || string.IsNullOrWhiteSpace(comment.Comment))
+                    return BadRequest("Invalid comment data.");
 
-            comment.Date = comment.Date == default ? DateTime.UtcNow : comment.Date;
-            _laptopService.AddComment(comment);
-            return Ok();
+                comment.Date = comment.Date == default ? DateTime.UtcNow : comment.Date;
+                _laptopService.AddComment(comment);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
 
         [HttpGet("GetComments/{assetId}")]
         public IActionResult GetComments(int assetId)
         {
-            var comments = _laptopService.GetComments(assetId);
-            var result = comments.Select(c => new { c.Date, c.Commentor, c.Comment });
-            return Ok(result);
+            try
+            {
+
+                var comments = _laptopService.GetComments(assetId);
+                var result = comments.Select(c => new { c.Date, c.Commentor, c.Comment });
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
 
 
