@@ -42,13 +42,23 @@ builder.Services.AddCors(options =>
     {
 
         policy.AllowAnyOrigin()
-             // policy.WithOrigins("http://192.168.0.108:401")
+           
              .AllowAnyHeader()
              .AllowAnyMethod()
              .WithExposedHeaders("*");
-       
+
     });
 });
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("FrontendTunnel", policy =>
+//    {
+//        policy.WithOrigins("https://1zgmf9zp-4200.inc1.devtunnels.ms") // Your frontend tunnel URL
+//              .AllowAnyHeader()
+//              .AllowAnyMethod();
+//    });
+//});
+
 
 var app = builder.Build();
 
@@ -59,6 +69,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//app.UseCors("FrontendTunnel");
 
 app.UseCors("AllowAllOrigins");
 
